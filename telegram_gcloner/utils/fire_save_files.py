@@ -36,9 +36,9 @@ class MySaveFileThread(threading.Thread):
         chat_id = update.effective_chat.id
         user_id = update.effective_user.id
         gd = GoogleDrive(user_id)
-        message = '目标目录：{}\n\n'.format(dest_folder['path'])
+        message = 'Target directory：{}\n\n'.format(dest_folder['path'])
         inline_keyboard = InlineKeyboardMarkup(
-            [[InlineKeyboardButton(text=f'停止', callback_data=f'stop_task,{thread_id}')]])
+            [[InlineKeyboardButton(text=f'stop', callback_data=f'stop_task,{thread_id}')]])
 
         reply_message_id = update.callback_query.message.reply_to_message.message_id \
             if update.callback_query.message.reply_to_message else None
@@ -154,11 +154,11 @@ class MySaveFileThread(threading.Thread):
                         progress_total_check_files = int(match_checked_files.group(2))
                     progress_max_percentage_10 = max(progress_size_percentage_10, progress_file_percentage_10)
                     message_progress = '<a href="https://drive.google.com/open?id={}">{}</a>\n' \
-                                       '检查文件： <code>{} / {}</code>\n' \
-                                       '文件数量： <code>{} / {}</code>\n' \
-                                       '任务容量：<code>{} / {}</code>\n{}' \
-                                       '复制速度：<code>{} ETA {}</code>\n' \
-                                       '任务进度：<code>[{}] {: >4}%</code>' \
+                                       'Check file： <code>{} / {}</code>\n' \
+                                       'Number of files： <code>{} / {}</code>\n' \
+                                       'Task capacity：<code>{} / {}</code>\n{}' \
+                                       'Copy speed：<code>{} ETA {}</code>\n' \
+                                       'Task progress：<code>[{}] {: >4}%</code>' \
                         .format(
                         folder_id,
                         html.escape(destination_path),
@@ -168,7 +168,7 @@ class MySaveFileThread(threading.Thread):
                         progress_total_files,
                         progress_transferred_size,
                         progress_total_size,
-                        f'任务速度：<code>{progress_speed_file}</code>\n' if is_fclone is True else '',
+                        f'Task speed：<code>{progress_speed_file}</code>\n' if is_fclone is True else '',
                         progress_speed,
                         progress_eta,
                         '█' * progress_file_percentage_10 + '░' * (
@@ -178,9 +178,9 @@ class MySaveFileThread(threading.Thread):
 
                     match = re.search(r'Failed to copy: failed to make directory', output)
                     if match:
-                        message_progress = '{}\n<code>写入权限错误，请确认权限</code>'.format(message_progress)
+                        message_progress = '{}\n<code>Write permission error, please confirm permission</code>'.format(message_progress)
                         temp_message = '{}{}'.format(message, message_progress)
-                        # logger.info('写入权限错误，请确认权限'.format())
+                        # logger.info('Write permission error, please confirm permission'.format())
                         try:
                             context.bot.edit_message_text(chat_id=chat_id, message_id=message_id,
                                                           text=temp_message, parse_mode=ParseMode.HTML,
@@ -195,9 +195,9 @@ class MySaveFileThread(threading.Thread):
 
                     match = re.search(r"couldn't list directory", output)
                     if match:
-                        message_progress = '{}\n<code>读取权限错误，请确认权限</code>'.format(message_progress)
+                        message_progress = '{}\n<code>Read permission error, please confirm permission</code>'.format(message_progress)
                         temp_message = '{}{}'.format(message, message_progress)
-                        # logger.info('读取权限错误，请确认权限：')
+                        # logger.info('Read permission error, please confirm permission：')
                         try:
                             context.bot.edit_message_text(chat_id=chat_id, message_id=message_id,
                                                           text=temp_message, parse_mode=ParseMode.HTML,
@@ -226,7 +226,7 @@ class MySaveFileThread(threading.Thread):
                             progress_update_time = datetime.datetime.now()
 
                     if self.critical_fault:
-                        message_progress = '{}\n<code>用户终止</code>'.format(message_progress)
+                        message_progress = '{}\n<code>User termination</code>'.format(message_progress)
                         process.terminate()
                         break
 
@@ -244,7 +244,7 @@ class MySaveFileThread(threading.Thread):
                 message = '{}{}❌\n{}\n{}\n\n'.format(message, message_progress_heading, message_progress_content,
                                                      link_text)
             elif progress_file_percentage == 0 and progress_checked_files > 0:
-                message = '{}{}✅\n已存在\n{}\n\n'.format(message, message_progress_heading, link_text)
+                message = '{}{}✅\nexisted\n{}\n\n'.format(message, message_progress_heading, link_text)
             else:
                 message = '{}{}{}\n{}\n{}\n\n'.format(message,
                                                       message_progress_heading,
@@ -271,7 +271,7 @@ class MySaveFileThread(threading.Thread):
             logger.debug('Error {} occurs when editing message {} for user {} in chat {}: \n{}'.format(
                 e, message_id, user_id, chat_id, message))
         update.callback_query.message.edit_reply_markup(reply_markup=InlineKeyboardMarkup(
-            [[InlineKeyboardButton(text='已完成', callback_data='cancel')]]))
+            [[InlineKeyboardButton(text='completed', callback_data='cancel')]]))
 
         logger.debug('User {} has finished task {}: \n{}'.format(user_id, thread_id, message))
         tasks = thread_pool.get(user_id, None)
