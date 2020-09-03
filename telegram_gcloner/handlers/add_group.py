@@ -32,7 +32,7 @@ def add_group(update, context):
                                      .format(mention_html_from_user,
                                              config.AD_STRING.format(context.bot.username)),
                                      parse_mode=ParseMode.HTML)
-            context.bot.send_message(chat_id=update.message.chat_id, text='本群未认证，已退群')
+            context.bot.send_message(chat_id=update.message.chat_id, text='This group is not certified and has been withdrawn')
             message = 'Left unauthorized group: {} ({}). {} {}. {}'.format(
                 update.message.chat.title,
                 update.message.chat_id,
