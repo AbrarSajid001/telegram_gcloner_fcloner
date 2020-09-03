@@ -25,8 +25,8 @@ def init(dispatcher: Dispatcher):
 
 @restricted_private
 def get_sa(update, context):
-    instruction_text = '请私聊上传含有SA文件的ZIP文件，并在telegram标题写上/sa。\n' \
-                       '手机用户请先上传ZIP文件，再以/sa回复该信息。'
+    instruction_text = 'Please upload a ZIP file containing SA files in private chat, and write /sa in the telegram title.\n' \
+                       'Mobile phone users please upload the ZIP file first, and then reply to the message with /sa.'
     if update.message and update.message.caption and update.message.caption.startswith('/sa'):
         document = update.message.document
     elif update.message and update.message.reply_to_message:
@@ -45,7 +45,7 @@ def get_sa(update, context):
     file_name = document.file_name
 
     if not file_name.endswith('zip'):
-        update.message.reply_text('只接受zip文件。')
+        update.message.reply_text('Only zip files are accepted.')
         return
 
     file_pah = os.path.join(gclone_path,
@@ -106,5 +106,5 @@ def get_sa(update, context):
     with open(os.path.join(zip_path, 'rclone.conf'), 'w') as file_to_write:
         config_file.write(file_to_write)
 
-    update.message.reply_text('共收到{}个SA文件，已配置。'.format(json_count))
+    update.message.reply_text('A total of {} SA files have been received and configured.'.format(json_count))
     logger.info('{} service account files have been saved for {}.'.format(json_count, update.effective_user.id))
