@@ -18,7 +18,7 @@ Demo robot: http://t.me/ahzhebot
 
 Download the Zip version or download via git clone
 ```
-$ git clone https://github.com/wrenfairbank/telegram_gcloner
+$ git clone https://github.com/Waga43/telegram_gcloner
 ```
 Install dependencies through requirements.txt
 ```
