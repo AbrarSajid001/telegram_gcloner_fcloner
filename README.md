@@ -1,4 +1,4 @@
-# telegram gcloner | Edited/Modified by EduTechTainMent (ETTM)
+# telegram gcloner fcloner | Edited/Modified by EduTechTainMent (ETTM)
 
 A Telegram bot to save Google Drive resources manually. If you have a good idea, please PR.
 
