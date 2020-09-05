@@ -1,4 +1,4 @@
-# telegram gcloner
+# telegram gcloner | Edited/Modified by EduTechTainMent (ETTM)
 
 A Telegram bot to save Google Drive resources manually. If you have a good idea, please PR.
 
@@ -18,7 +18,7 @@ Demo robot: http://t.me/ahzhebot
 
 Download the Zip version or download via git clone
 ```
-$ git clone https://github.com/Waga43/telegram_gcloner
+$ git clone https://github.com/Waga43/telegram_gcloner_fcloner
 ```
 Install dependencies through requirements.txt
 ```
@@ -44,6 +44,8 @@ If you are interested, you can adjust the permissions in `./utils/restricted.py`
    -Mobile phone users can upload the ZIP file first, and then reply to the message `/sa`.
 3. Send `/folders` to the robot to set frequently used folders.
 4. Send or forward the information with the Google Drive link to the robot and follow the prompts.
+
+All Credits to Original Dev: [wrenfairbank](https://github.com/wrenfairbank/telegram_gcloner)
 
 ## License
 
