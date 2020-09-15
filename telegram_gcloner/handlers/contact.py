@@ -41,7 +41,7 @@ def contact(update, context):
             context.job_queue.run_once(callback_delete_message, config.TIMER_TO_DELETE_MESSAGE,
                                        context=(update.message.chat_id, update.message.message_id))
     else:
-        rsp = update.message.reply_text('So shy, don't you say something?\n' +
+        rsp = update.message.reply_text('So shy, dont you say something?\n' +
                                         config.AD_STRING.format(context.bot.username),
                                         ParseMode.HTML)
         rsp.done.wait(timeout=60)
