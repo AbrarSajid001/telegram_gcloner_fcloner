@@ -3,7 +3,9 @@
 A Telegram bot to save Google Drive resources manually. If you have a good idea, please PR.
 
 Demo robot: http://t.me/ahzhebot
+## ETTM GUIDE
 
+[EduTechTainMent Guide to Deploy Bots Locally Using Your Android Phone as Server](https://edutechtainment.com/guides/how-to-deploy-telegram-fclone-and-gclone-bot-hosted-locally-on-your-phone/) 
 ## Instructions
 
 ### Ready to work
